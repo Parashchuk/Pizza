@@ -1,16 +1,22 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { setCurrentPage } from '../redux/slices/filter';
 import styles from '../scss/components/pagination.module.scss';
 
-const Pagination = ({ currentPage, setCurrentPage }) => {
+const Pagination = () => {
   const countOfElements = 10;
   const countOfElementsOnPage = 4;
 
+  const { currentPage } = useSelector((store) => store.filter);
+  const dispatch = useDispatch();
+
   let pagination = [...new Array(Math.ceil(countOfElements / countOfElementsOnPage))];
 
-  const nexPage = () => (currentPage < pagination.length ? setCurrentPage(currentPage + 1) : null);
+  const nexPage = () =>
+    currentPage < pagination.length ? dispatch(setCurrentPage(currentPage + 1)) : null;
 
-  const previousPage = () => (currentPage > 1 ? setCurrentPage(currentPage - 1) : null);
+  const previousPage = () => (currentPage > 1 ? dispatch(setCurrentPage(currentPage - 1)) : null);
 
   return (
     <div className={styles.root}>
@@ -21,7 +27,7 @@ const Pagination = ({ currentPage, setCurrentPage }) => {
           return (
             <li
               className={currentPage === id ? `${styles.active}` : ''}
-              onClick={() => setCurrentPage(id)}
+              onClick={() => dispatch(setCurrentPage(id))}
               key={id}>
               {id}
             </li>
