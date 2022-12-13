@@ -42,8 +42,8 @@ const Home = () => {
   return (
     <>
       <div className="content__top">
-        <Categories categoryIndex={categoryIndex} setCategoryIndex={(i) => setCategoryIndex(i)} />
-        <Sort sortProperty={sortProperty} setSortProperty={(i) => setSortProperty(i)} />
+        <Categories categoryIndex={categoryIndex} setCategoryIndex={setCategoryIndex} />
+        <Sort sortProperty={sortProperty} setSortProperty={setSortProperty} />
       </div>
       <h2 className="content__title">All pizzas</h2>
       <div className="content__items">

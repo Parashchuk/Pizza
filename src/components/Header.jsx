@@ -34,10 +34,10 @@ const Header = () => {
         </div>
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
-            <span>520 ₽</span>
+            <span>0 $</span>
             <div className="button__delimiter"></div>
             <img src={cart} alt="cart" />
-            <span>3</span>
+            <span>0</span>
           </Link>
         </div>
       </div>
