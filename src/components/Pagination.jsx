@@ -17,12 +17,13 @@ const Pagination = ({ currentPage, setCurrentPage }) => {
       <ul>
         <li onClick={() => previousPage()}>{'<'}</li>
         {pagination.map((_, id) => {
+          id += 1;
           return (
             <li
-              className={currentPage - 1 == id ? `${styles.active}` : ''}
+              className={currentPage === id ? `${styles.active}` : ''}
               onClick={() => setCurrentPage(id)}
               key={id}>
-              {id + 1}
+              {id}
             </li>
           );
         })}

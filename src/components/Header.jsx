@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import { searchContext } from '../App';
 import cart from '../assets/img/cart.svg';
 import logo from '../assets/img/pizza-logo.svg';
 import search from '../assets/img/search.svg';
 import close from '../assets/img/close.svg';
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header = () => {
+  const searchState = useContext(searchContext);
+
   return (
     <div className="header">
       <div className="container">
@@ -22,20 +25,20 @@ const Header = ({ searchValue, setSearchValue }) => {
         <div className="header__input-field">
           <img src={search} alt="search" />
           <input
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
+            value={searchState.searchValue}
+            onChange={(event) => searchState.setSearchValue(event.target.value)}
             type="text"
             placeholder="Search your pizza ..."
           />
           <img src={close} alt="close" />
         </div>
         <div className="header__cart">
-          <a href="/cart.html" className="button button--cart">
+          <Link to="/cart" className="button button--cart">
             <span>520 ₽</span>
             <div className="button__delimiter"></div>
             <img src={cart} alt="cart" />
             <span>3</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

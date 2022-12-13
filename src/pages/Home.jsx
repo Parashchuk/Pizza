@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
+import { searchContext } from '../App';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -6,8 +8,10 @@ import PizzaBlock from '../components/pizzaBlock/PizzaBlock';
 import PizzaSkeleton from '../components/pizzaBlock/pizzaSkeleton';
 import Pagination from '../components/Pagination';
 
-const Home = ({ searchValue }) => {
+const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { searchValue } = useContext(searchContext);
 
   const [items, setItems] = React.useState([]);
   const [pizzaLoadingStatus, setPizzaLoadingStatus] = useState(true);
@@ -16,7 +20,7 @@ const Home = ({ searchValue }) => {
   const [categoryIndex, setCategoryIndex] = useState(0);
 
   useEffect(() => {
-    const categoryQuery = categoryIndex ? `category=${categoryIndex}` : '';
+    //const categoryQuery = categoryIndex ? `category=${categoryIndex}` : '';
     const sortQuery =
       '&sortBy=' +
       sortProperty.value.replace('-', '') +
@@ -26,11 +30,7 @@ const Home = ({ searchValue }) => {
 
     setPizzaLoadingStatus(true);
     fetch(
-      'https://6397450186d04c7633906af2.mockapi.io/items?' +
-        pageQuerry +
-        categoryQuery +
-        sortQuery +
-        searchQuery,
+      'https://6397450186d04c7633906af2.mockapi.io/items?' + pageQuerry + sortQuery + searchQuery,
     )
       .then((res) => res.json())
       .then((json) => {
